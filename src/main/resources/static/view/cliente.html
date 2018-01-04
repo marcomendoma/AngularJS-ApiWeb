@@ -1,0 +1,57 @@
+<style>
+	fieldset{
+		display: inline;
+	}
+</style>
+
+<form novalidate="novalidate" name="frmCliente">
+	<div>
+		<div>
+			<label>Nome:</label>
+			<input type="text" name="txtNome" ng-model="cliente.nome" ng-minlength="5" ng-maxlength="50" required="required" />
+			<span ng-show="frmCliente.txtNome.$error.required && frmCliente.txtNome.$dirty">Campo nome é obrigatório.</span>
+		</div>
+		<div>
+			<label>E-mail:</label>
+			<input type="email" name="txtEmail" ng-model="cliente.email" required="required" />
+			<span ng-show="frmCliente.txtEmail.$error.required && frmCliente.txtEmail.$dirty">Campo email é obrigatório.</span>
+			<span ng-show="frmCliente.txtEmail.$error.email">E-mail invalido.</span>
+		</div>
+		<div ng-controller="estadoController">
+			<label>Uf:</label>
+			<select>
+				<option ng-repeat="uf in estados" value="{{ uf.id }}" >
+					{{ uf.uf }}
+				</option>
+			</select>
+		</div>
+		<!-- <input type="button" value="salvar" ng-click="salvarClientes()" ng-disabled="frmCliente.$invalid" />--> 
+		<input type="button" value="salvar" ng-click="salvarUsuario()" />
+		<input type="button" value="cancelar" ng-click="cancelarCliente()" ng-disabled="frmCliente.$invalid"/>
+
+		<div ng-repeat="cli in clientes">
+			{{ cli.id + '|' + cli.nome + '|' + cli.uf }} 
+				<input type="button" value="excluir" ng-click="excluirClientes(cli)" /> 
+				<input type="button" value="alterar" ng-click="alterarCliente(cli)" /> 
+				<a href="clientes/{{cli.id}}">Detalhe</a>
+		</div>
+	</div>
+	<div>
+		<fieldset>
+			<legend>Formulário</legend>
+			Valid: {{ frmCliente.$valid}}
+		</fieldset>
+		<fieldset>
+			<legend>Nome</legend>
+			Valid: {{ frmCliente.txtNome.$valid }} <br/>
+			Invalid: {{ frmCliente.txtNome.$invalid }} <br/>
+			Pristine: {{ frmCliente.txtNome.$pristine }} <br/>
+			Dirty: {{ frmCliente.txtNome.$dirty }} <br/>
+			Touched: {{ frmCliente.txtNome.$touched }} <br/>
+			Error Required and Dirty: {{ frmCliente.txtNome.$error.required && frmCliente.txtNome.$dirty }} <br/>
+			Error MinLength: {{ frmCliente.txtNome.$error.minlength }} <br/>
+			Error MaxnLength: {{ frmCliente.txtNome.$error.maxlength }} <br/>
+		</fieldset>
+	</div>
+	
+</form>

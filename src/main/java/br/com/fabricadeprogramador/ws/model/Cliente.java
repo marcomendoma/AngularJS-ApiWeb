@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name="cliente")
-public class Cliente { 
+public class Cliente {   
 	
 	@Id
 	@SequenceGenerator(name = "cliente_id", sequenceName = "cliente_seq", initialValue = 1, allocationSize = 1)
